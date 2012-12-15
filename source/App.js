@@ -22,10 +22,20 @@ enyo.kind({
 			{name: "div9", classes: "div9"}
 		]},
 		{kind: "onyx.Toolbar", components:[
-			{kind: "onyx.Button", content: "Activate", ontap: "activated"}
+			{kind: "onyx.RadioGroup", components:[
+				{content: "Activate Screen", ontap: "activated"},
+				{content: "Deactivate Screen", ontap: "deactivated", active: true},
+			]},
 		]}
 	],
 	activated: function(inSender, inEvent) {
+		this.$.animator.setStartValue(0);
+		this.$.animator.setEndValue(2);
+		this.$.animator.play();
+	},
+	deactivated: function(inSender, inEvent) {
+		this.$.animator.setStartValue(2);
+		this.$.animator.setEndValue(0);
 		this.$.animator.play();
 	},
 	animatorStep: function(inSender, inEvent) {
